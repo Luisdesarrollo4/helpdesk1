@@ -1,9 +1,9 @@
-    <?php
+<?php
         include "../../clases/conexion.php"; // Incluye el archivo de conexión a la base de datos
         $con = new conexion();
         $conexion = $con->conectar(); // Establece la conexión con la base de datos
         $sql = "SELECT 
-                usuarios.id_usuario_ges AS idUsuario,
+                usuarios.id_usuario AS idUsuario,
                 usuarios.usuario AS nombreUsuario,
                 roles.nombre AS rol,
                 usuarios.id_rol AS idRol,
@@ -18,13 +18,14 @@
                 persona.correo AS correo,
                 persona.telefono as telefono
             FROM
-                t_usuarios_humana AS usuarios 
+                t_usuarios AS usuarios 
                     INNER JOIN 
                 t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol 
                     INNER JOIN 
                 t_persona AS persona ON usuarios.id_persona = persona.id_persona
-                    INNER JOIN
-                areas AS area ON usuarios.area = area.ID"; // Consulta SQL para obtener los datos de los usuarios
+                INNER JOIN
+                areas AS area ON usuarios.area = area.ID
+                where usuarios.area = 7"; // Consulta SQL para obtener los datos de los usuarios
 
             $respuesta = mysqli_query($conexion, $sql); // Ejecuta la consulta y guarda el resultado en $respuesta
     ?>

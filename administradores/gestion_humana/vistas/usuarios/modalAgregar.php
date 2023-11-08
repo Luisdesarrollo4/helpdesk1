@@ -82,17 +82,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="area">Area</label>
+                            <input type="hidden" id="area_superadmin" name="area_superadmin" value="1">
                             <!-- Select para elegir el área -->
                             <select name="area" id="area" class="form-control">
-                                <option value="">Seleccione un área</option>
-                                <option value="1">Dep. Sistemas</option>
-                                <option value="2">Dep. Jurídico</option>
-                                <option value="3">Cartera</option>
-                                <option value="4">Análisis</option>
-                                <option value="5">Gestión Humana</option>
-                                <option value="6">Presidencia</option>
-                                <option value="7">Global Finanzas</option>
-                                <option value="8">Finanzas Centro</option>
+                            <option value="">Seleccione un área</option>
+                                <option value="7">gestion humana</option>
                             </select>
                         </div>
                     </div>

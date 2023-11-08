@@ -5,12 +5,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <!-- Título del modal -->
-                    <h5 class="modal-title" id="exampleModalLabel">adorAgregar Nuevo Usuario</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Nuevo Administrador</h5>
                     <!-- Botón para cerrar el modal -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
+                </div> 
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-4">
@@ -82,17 +82,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="area">Area</label>
+                            <input type="hidden" id="area_superadmin" name="area_superadmin" value="1">
                             <!-- Select para elegir el área -->
                             <select name="area" id="area" class="form-control">
-                                <option value="">Seleccione un área</option>
-                                <option value="1">Dep. Sistemas</option>
-                                <option value="2">Dep. Jurídico</option>
-                                <option value="3">Cartera</option>
-                                <option value="4">Análisis</option>
-                                <option value="5">Gestión Humana</option>
-                                <option value="6">Presidencia</option>
-                                <option value="7">Global Finanzas</option>
-                                <option value="8">Finanzas Centro</option>
+                            <option value="">Seleccione un área</option>
+                                <option value="6">Desarrollo</option>
                             </select>
                         </div>
                     </div>

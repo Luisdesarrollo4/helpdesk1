@@ -9,9 +9,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <!-- Campo de selección para elegir el dispositivo -->
-          <label for="idEquipo">Mis Dispositivos</label>
+        <div class="modal-body">  
 
           <?php 
             // Obtiene el ID del usuario almacenado en la sesión
@@ -38,23 +36,6 @@
             // Ejecuta la consulta SQL
             $respuesta = mysqli_query($conexion, $sql);              
           ?>
-
-          <select name="idEquipo" id="idEquipo" class="form-control" required>
-            <option value="">Selecciona un Dispositivo</option>
-            <?php while($mostrar = mysqli_fetch_array($respuesta)){?>
-              <option value="<?php echo $mostrar['idEquipo']?>"> <?php echo $mostrar['nombreEquipo']; ?></option>
-            <?php }?>
-          </select>
-          
-          <!-- Campo de selección para elegir el número de asignación -->
-          <label for="numeroAsignacion">Número de Asignación</label>
-          <select name="numeroAsignacion" id="numeroAsignacion" class="form-control" required>
-            <option value="">Selecciona un número de asignación</option>
-            <?php mysqli_data_seek($respuesta, 0); // Reiniciar el puntero del conjunto de resultados ?>
-            <?php while($mostrar = mysqli_fetch_array($respuesta)){?>
-              <option value="<?php echo $mostrar['numeroAsignacion']?>"> <?php echo $mostrar['numeroAsignacion']; ?></option>
-            <?php }?>
-          </select>
           
           <!-- Campo de texto para describir el problema -->
           <label for="problema">Describe tu problema</label>
@@ -69,6 +50,19 @@
             <option value="BAJA">BAJA</option>
           </select>
 
+          <label for="area">Area</label>
+          <select name="area" id="area" class="form-control" required>
+            <option value="">Seleccione el area</option>
+            <option value="1">Afianzamiento</option>
+            <option value="2">Analisis</option>
+            <option value="3">Cartera</option>
+            <option value="4">Comercial</option>
+            <option value="5">Contabilidad</option>
+            <option value="6">Desarrollo</option>
+            <option value="7">Gestion Humana</option>
+            <option value="8">Juridico</option>
+            <option value="10">Sistemas</option>
+          </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
