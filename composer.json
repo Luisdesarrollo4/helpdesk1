@@ -1,0 +1,19 @@
+{
+    "name": "lpena/helpdesk1",
+    "autoload": {
+        "psr-4": {
+            "Lpena\\Helpdesk1\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yo"
+        }
+    ],
+    "require": {
+        "php": "^8.2.4",
+        "ext-mbstring": "*",
+        "ext-xml": "*",
+        "cboden/ratchet": "^0.4"
+    }
+}
