@@ -90,7 +90,10 @@
                     data-toggle="modal" data-target="#modalAgregarSolucionReporte">
                     Solución
                     </button>
-                    <?php echo $mostrar['solucion'] ?>
+                    <button class="btn btn-info btn-sm" onclick="verMensaje('<?php echo $mostrar['solucion'];?>')" data-toggle="modal" data-target="#modalVerMensaje">
+                            Ver
+                    </button>
+
                 </td>
                 <td>
                     <?php 
@@ -103,6 +106,7 @@
                     <?php 
                         }
                     ?>
+                    
                 </td>
             
             <td><?php echo $mostrar['area']; ?></td>
@@ -119,6 +123,30 @@
         <?php } ?>
     </tbody>
 </table>
+<div class="modal fade" id="modalVerMensaje" tabindex="-1" role="dialog" aria-labelledby="modalVerMensajeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVerMensajeLabel">Mensaje Detallado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="mensajeDetallado"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function verMensaje(mensaje) {
+        document.getElementById("mensajeDetallado").innerText = mensaje;
+    }
+</script>
+
 <script>
     $(document).ready(function(){
         // Inicialización de DataTables y configuración de los botones de exportación

@@ -5,7 +5,7 @@
         public function actualizarPersonales($datos){ // Método para actualizar los datos personales
             $conexion = Conexion::conectar(); // Establece la conexión con la base de datos utilizando el método conectar() de la clase padre Conexion
             $idUsuario = $datos['idUsuario']; // Obtiene el ID de usuario de los datos proporcionados
-            $sql = "SELECT id_persona FROM t_usuarios_contabilidad WHERE id_usuario_cont = '$idUsuario'"; // Consulta SQL para obtener el ID de persona asociado al ID de usuario
+            $sql = "SELECT id_persona FROM t_usuarios WHERE id_usuario = '$idUsuario'"; // Consulta SQL para obtener el ID de persona asociado al ID de usuario
             $respuesta = mysqli_query($conexion,$sql); // Ejecuta la consulta en la base de datos
             $idPersona = mysqli_fetch_row($respuesta)[0]; // Obtiene el ID de persona de la respuesta y lo almacena en la variable $idPersona
             $sql = "UPDATE

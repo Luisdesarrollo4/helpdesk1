@@ -5,7 +5,7 @@
         // Método para realizar el inicio de sesión de un usuario
         public function loginUsuario($usuario, $password) {
             $conexion = Conexion::conectar();
-            $sql = "SELECT * FROM t_usuarios_contabilidad
+            $sql = "SELECT * FROM t_usuarios
                     WHERE usuario = '$usuario' AND password = '$password'";
             $respuesta = mysqli_query($conexion, $sql);
 
@@ -32,7 +32,7 @@
             $idPersona = self::agregarPersona($datos);
 
             if ($idPersona > 0) {
-                $sql = "INSERT INTO t_usuarios_contabilidad (id_rol, id_persona, usuario, password, area)
+                $sql = "INSERT INTO t_usuarios (id_rol, id_persona, usuario, password, area)
                         VALUES (?, ?, ?, ?, ?)";
                 $query = $conexion->prepare($sql);
                 $query->bind_param("iisss", $datos['idRol'], $idPersona, $datos['usuario'], $datos['password'], $datos['area']);
@@ -62,7 +62,7 @@
         // Método para obtener los datos de un usuario
         public function obtenerDatosUsuario($idUsuario) {
             $conexion = Conexion::conectar();
-            $sql = "SELECT usuarios.id_usuario_cont AS idUsuario, usuarios.usuario AS nombreUsuario,
+            $sql = "SELECT usuarios.id_usuario AS idUsuario, usuarios.usuario AS nombreUsuario,
                     roles.nombre AS rol, usuarios.id_rol AS idRol, usuarios.area AS area,
                     usuarios.activo AS estatus, usuarios.id_persona AS idPersona,
                     persona.oficina AS oficina, persona.tipo_documento AS tipoDocumento,
@@ -71,7 +71,7 @@
                     FROM t_usuarios_contabilidad AS usuarios
                     INNER JOIN t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
                     INNER JOIN t_persona AS persona ON usuarios.id_persona = persona.id_persona
-                    AND usuarios.id_usuario_cont = '$idUsuario'";
+                    AND usuarios.id_usuario = '$idUsuario'";
             $respuesta = mysqli_query($conexion, $sql);
             $usuario = mysqli_fetch_array($respuesta);
 
@@ -100,8 +100,8 @@
             $exitoPersona = self::actualizarPersona($datos);
 
             if ($exitoPersona) {    
-                $sql = "UPDATE t_usuarios_contabilidad SET id_rol = ?, usuario = ?, area = ?
-                        WHERE id_usuario_cont = ?";   
+                $sql = "UPDATE t_usuarios SET id_rol = ?, usuario = ?, area = ?
+                        WHERE id_usuario = ?";   
                 $query = $conexion->prepare($sql);
                 $query->bind_param('issi', $datos['idRol'], $datos['usuario'], $datos['area'], $datos['idUsuario']); 
                 $respuesta = $query->execute();
@@ -130,9 +130,9 @@
         // Método para obtener el ID de la persona asociada a un usuario
         public function obtenerIdPersona($idUsuario) {
             $conexion = Conexion::conectar();
-            $sql = "SELECT persona.id_persona AS idPersona FROM t_usuarios_contabilidad AS usuarios
+            $sql = "SELECT persona.id_persona AS idPersona FROM t_usuarios AS usuarios
                     INNER JOIN t_persona AS persona ON usuarios.id_persona = persona.id_persona
-                    AND usuarios.id_usuario_cont = '$idUsuario'";
+                    AND usuarios.id_usuario = '$idUsuario'";
             $respuesta = mysqli_query($conexion, $sql);
             $idPersona = mysqli_fetch_array($respuesta)['idPersona'];
             return $idPersona;
@@ -141,7 +141,7 @@
         // Método para restablecer la contraseña de un usuario
         public function resetPassword($datos) {
             $conexion = Conexion::conectar();
-            $sql = "UPDATE t_usuarios_contabilidad SET password = ? WHERE id_usuario_cont = ?";
+            $sql = "UPDATE t_usuarios SET password = ? WHERE id_usuario = ?";
             $query = $conexion->prepare($sql);
             $query->bind_param('si', $datos['password'], $datos['idUsuario']);
             $respuesta = $query->execute();
@@ -159,7 +159,7 @@
                 $estatus = 1;
             }
 
-            $sql = "UPDATE t_usuarios_contabilidad SET activo = ? WHERE id_usuario_cont = ?";
+            $sql = "UPDATE t_usuarios SET activo = ? WHERE id_usuario = ?";
             $query = $conexion->prepare($sql);
             $query->bind_param('ii', $estatus, $idUsuario);
             $respuesta = $query->execute();
@@ -200,7 +200,7 @@
             $asignaciones = self::buscarAsignacionPersona($datos['idPersona']);
 
             if ($reportes == 0 && $asignaciones == 0) {
-                $sql = "DELETE FROM t_usuarios_contabilidad WHERE id_usuario_cont = ?";
+                $sql = "DELETE FROM t_usuarios WHERE id_usuario = ?";
                 $query = $conexion->prepare($sql);
                 $query->bind_param('i', $datos['idUsuario']);
                 $respuesta = $query->execute();

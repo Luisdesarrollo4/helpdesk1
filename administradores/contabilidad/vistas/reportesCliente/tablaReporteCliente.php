@@ -23,14 +23,17 @@
                 reporte.descripcion_general AS problema,
                 reporte.estatus_general AS estatus,
                 reporte.solucion_general AS solucion,
+                reporte.fecha_cierre AS fecha_cierre,
                 reporte.fecha_general AS fecha,
-                reporte.prioridad_general AS prioridad
+                reporte.prioridad_general AS prioridad,
+                areas.Nombre AS area
             FROM
-                t_reportes_general AS reporte
-            INNER JOIN t_usuarios_contabilidad AS usuario ON reporte.id_usuario = usuario.id_usuario_cont
+                        t_reportes_general AS reporte
+            INNER JOIN t_usuarios AS usuario ON reporte.id_usuario = usuario.id_usuario
             INNER JOIN t_persona AS persona ON usuario.id_persona = persona.id_persona
-            WHERE
-                reporte.id_usuario = '$idUsuario'";
+            LEFT JOIN areas ON reporte.id_area = areas.ID
+            WHERE reporte.id_area = 5 OR reporte.id_area_envio = 5";
+
     
     // Ejecuta la consulta SQL
     $respuesta = mysqli_query($conexion, $sql);
@@ -46,9 +49,12 @@
             <th>Descripcion</th>
             <th>Prioridad</th>
             <th>Estatus</th>
+            <th>Fecha Cierre</th>
             <th>Solucion</th>
+            <th>Area</th>
             <th>Eliminar</th>
             <th>Bitacora</th>
+            <th>chat</th>
         </tr>
     </thead>
     <tbody>
@@ -60,17 +66,33 @@
             <td><?php echo $mostrar['problema']; ?></td>
             <td><?php echo $mostrar['prioridad'];?></td>
             <td>
-                <?php  
-                // Verifica el estatus del reporte y muestra un badge con el estado correspondiente
-                $estatus = $mostrar['estatus'];
-                $cadenaEstatus = '<span class="badge badge-danger">Abierto</span>';
-                if ($estatus == 1) {
-                    $cadenaEstatus = '<span class="badge badge-success">Cerrado</span>';
-                }
-                echo $cadenaEstatus;
-                ?>
+                    <?php  
+                    // Verifica el estatus del reporte y muestra un badge con el estado correspondiente
+                    $fechaCierre = $mostrar['fecha_cierre'];
+                    $estatus = $mostrar['estatus'];
+                    $cadenaEstatus = '<span class="badge badge-danger">Abierto</span>';
+                    if ($estatus == 1) {
+                        $cadenaEstatus = '<span class="badge badge-success">Cerrado</span>';
+                    } elseif ($fechaCierre && time() > strtotime($fechaCierre)) {
+                        $this->actualizarSolucionCliente(array(
+                            'idReporte' => $mostrar['idReporte'],
+                            'solucion' => 'Cerrado automáticamente por el sistema debido a la prioridad y la fecha de cierre.',
+                            'estatus' => 1
+                        ));
+                        $cadenaEstatus = '<span class="badge badge-success">Cerrado</span>';}
+                    echo $cadenaEstatus;
+                    ?>
+                </td>
+            <td><?php echo $fechaCierre; ?></td>
+           <td>
+            <!-- <button class="btn btn-info btn-sm"
+                    onclick="obtenerDatosSolucionCliente('<?php echo $mostrar['idReporte'];?>')"
+                    data-toggle="modal" data-target="#modalCambiarEstatus">
+                    Solución
+            </button> -->
+                    <?php echo $mostrar['solucion'] ?>
             </td>
-            <td><?php echo $mostrar['solucion']; ?></td>
+            <td><?php echo $mostrar['area']; ?></td>
             <td>
                 <?php 
                 // Si el reporte no tiene solución, muestra un botón de eliminar
@@ -82,19 +104,19 @@
                 <?php }?>
             </td>
             <td>
-                <button class="btn btn-outline-danger far fa-file-pdf"> PDF </button>
-            </td>
+            <a class="btn btn-outline-danger far fa-file-pdf" href="generarpdf.php?idUsuario=<?php echo $mostrar['idUsuario']; ?>"> PDF </a>
+
+
+                </td>
+            <td>
+                    <a class="btn btn-success" href="chat/index.php?id=<?php echo $idUsuario ?>">Hola
+                    </a>
+                </td>
+
         </tr>
         <?php } ?>
     </tbody>
 </table>
-
-<!-- Se agrega un elemento de chat y un script para interactuar con un sistema de llamadas -->
-<td>    
-    <call-us-selector phonesystem-url="https://1341.3cx.cloud" party="LiveChat632306"></call-us-selector>
-    <script defer src="https://downloads-global.3cx.com/downloads/livechatandtalk/v1/callus.js" id="tcx-callus-js" charset="utf-8"></script>
-</td>
-
 <script>
     $(document).ready(function(){
         // Inicialización de DataTables y configuración de los botones de exportación
