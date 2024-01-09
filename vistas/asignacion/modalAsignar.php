@@ -21,8 +21,8 @@
                                     FROM 
                                         t_persona AS persona 
                                         INNER JOIN 
-                                        t_usuarios_sistemas AS usuario ON persona.id_persona = usuario.id_persona
-                                        AND usuario.id_rol = 1 
+                                        t_usuarios AS usuario ON persona.id_persona = usuario.id_persona
+                                        
                                     ORDER BY persona.nombres";
                                     $respuesta = mysqli_query($conexion, $sql);
                                 ?>

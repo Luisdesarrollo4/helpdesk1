@@ -4,7 +4,7 @@
             // Definir los datos de conexión
             $servername = "localhost";  // Cambiar a la dirección de tu servidor de base de datos si es necesario
             $username = "root";  // Cambiar al nombre de usuario de tu base de datos
-            $password = "root";  // Cambiar a la contraseña de tu base de datos
+            $password = "";  // Cambiar a la contraseña de tu base de datos
             $dbname = "helpdesk1";  // Cambiar al nombre de tu base de datos
 
             // Crear la conexión
