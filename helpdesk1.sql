@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2023 at 07:32 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Feb 23, 2024 at 04:34 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
-Create Database: `helpdesk1`
-use helpdesk1
+-- Database: `helpdesk1`
+--
 
 -- --------------------------------------------------------
 
@@ -98,17 +98,17 @@ CREATE TABLE `chat_conversation` (
 --
 
 INSERT INTO `chat_conversation` (`id`, `id_usuario`, `id_reporte`, `nombre_chat`, `mensaje`, `timestamp`) VALUES
-(151, 0, 1, '', 'a', '2023-08-29 13:57:18'),
-(152, 0, 1, '', 'a', '2023-08-29 14:32:38'),
-(153, 0, 1, '', 'siu', '2023-08-29 14:32:44'),
-(154, 0, 1, '', 'nani nai?', '2023-08-29 14:32:51'),
-(155, 0, 1, '', 'ka', '2023-08-29 14:33:01'),
-(156, 0, 1, '', 'zapa', '2023-08-29 14:33:06'),
-(157, 0, 1, '', 'ehehehe', '2023-08-29 14:33:18'),
-(158, 0, 1, '', 'a', '2023-08-29 15:53:55'),
-(159, 0, 1, '', 'como esta!?', '2023-08-29 15:54:29'),
-(160, 0, 1, '', 'a', '2023-08-29 16:04:32'),
-(161, 0, 1, '', 'a', '2023-08-29 16:51:12');
+(151, 0, 1, '', 'a', '2023-08-29 18:57:18'),
+(152, 0, 1, '', 'a', '2023-08-29 19:32:38'),
+(153, 0, 1, '', 'siu', '2023-08-29 19:32:44'),
+(154, 0, 1, '', 'nani nai?', '2023-08-29 19:32:51'),
+(155, 0, 1, '', 'ka', '2023-08-29 19:33:01'),
+(156, 0, 1, '', 'zapa', '2023-08-29 19:33:06'),
+(157, 0, 1, '', 'ehehehe', '2023-08-29 19:33:18'),
+(158, 0, 1, '', 'a', '2023-08-29 20:53:55'),
+(159, 0, 1, '', 'como esta!?', '2023-08-29 20:54:29'),
+(160, 0, 1, '', 'a', '2023-08-29 21:04:32'),
+(161, 0, 1, '', 'a', '2023-08-29 21:51:12');
 
 -- --------------------------------------------------------
 
@@ -213,12 +213,12 @@ CREATE TABLE `t_asignacion` (
 --
 
 INSERT INTO `t_asignacion` (`id_asignacion`, `id_persona`, `id_equipo`, `marca`, `modelo`, `numero_asignacion`, `serial`) VALUES
-(24, 24, 5, 'LG', '22Mk-4000h', 'MNT-001', '1456456454879564'),
 (25, 24, 3, 'GENIUS', 'm/nDX-110', 'MOS-001', '1587895614564/89'),
 (26, 24, 4, 'hp', 'KU-1156', 'TCL-001', '167879456213'),
 (28, 24, 8, 'grandsStream', '1405', 'TLF-001', '134567989876543'),
 (29, 24, 6, 'iphone', '11 pro max 128 gb', 'CEL-001', '13256456478945654'),
-(38, 28, 1, 'Maximus', 'rancher', 'PCF-001', '1345679898765431');
+(38, 28, 1, 'Maximus', 'rancher', 'PCF-001', '1345679898765431'),
+(39, 64, 1, 'LENOVO', 'KMT-123', 'PCF-012', 'a124578997454');
 
 -- --------------------------------------------------------
 
@@ -437,12 +437,7 @@ CREATE TABLE `t_reportes_general` (
 --
 
 INSERT INTO `t_reportes_general` (`id_reporte_general`, `id_usuario`, `id_equipo`, `id_area`, `id_area_envio`, `id_usuario_asignado`, `descripcion_general`, `solucion_general`, `solicitud_aprobado`, `observacion`, `estatus_general`, `fecha_general`, `fecha_cierre`, `prioridad_general`) VALUES
-(94, 36, NULL, 10, 1, 37, 'a', 'nio se aaaaa', 0, '', 1, '2023-11-08 13:22:32', '2023-11-11 19:22:32', 'BAJA'),
-(95, 51, NULL, 10, 1, 52, 'no tengo internet', 'ya esta arreglado', 0, '', 1, '2023-11-08 14:54:09', '2023-11-09 20:54:09', 'ALTA'),
-(97, 51, NULL, 10, 1, NULL, 'sadd', 'a', 0, '', 0, '2023-11-08 15:03:24', '2023-11-10 21:03:24', 'MEDIA'),
-(98, 54, NULL, 6, 9, NULL, 'dasdas', NULL, 0, '', 0, '2023-11-08 16:20:38', '2023-11-09 22:20:38', 'ALTA'),
-(100, 36, NULL, 6, 1, NULL, 'a', NULL, 0, '', 0, '2023-11-08 16:27:30', '2023-11-09 22:27:30', 'ALTA'),
-(102, 54, NULL, 1, 9, NULL, 'a', NULL, 0, '', 0, '2023-11-08 16:33:26', '2023-11-09 22:33:26', 'ALTA');
+(103, 36, NULL, 10, 1, 37, 'se me fue el internet', 'asdadasda', 0, '', 1, '2023-12-12 15:09:44', '2023-12-15 21:09:44', 'BAJA');
 
 -- --------------------------------------------------------
 
@@ -618,7 +613,7 @@ ALTER TABLE `prioridades`
 -- AUTO_INCREMENT for table `t_asignacion`
 --
 ALTER TABLE `t_asignacion`
-  MODIFY `id_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `t_cat_administrativo`
@@ -660,7 +655,7 @@ ALTER TABLE `t_reportes`
 -- AUTO_INCREMENT for table `t_reportes_general`
 --
 ALTER TABLE `t_reportes_general`
-  MODIFY `id_reporte_general` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id_reporte_general` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `t_usuarios`
